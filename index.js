@@ -1,6 +1,9 @@
+require('dotenv').config()
+
 const port = process.env.PORT || 8080;
 const express = require('express');
 const cors = require('cors');
+const initRoutes = require('./routes');
 
 const app = express();
 
@@ -14,11 +17,7 @@ app.use((err, req, res, next)=>{
   });
 })
 
-app.get('/api/', (req, res) =>{
-  return res.status(200).json({
-    message: "API is running"
-  })
-})
+initRoutes(app);
 
 app.listen(port, ()=>{
   console.log(`Running on http://localhost:${port}`);
