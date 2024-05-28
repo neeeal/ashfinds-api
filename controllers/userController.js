@@ -5,7 +5,8 @@ const bcrypt = require('bcrypt');
 
 exports.get = async function (req, res) {
     try {
-      const result = await db.query();
+    const query = 'SELECT * FROM users;'
+    const result = await db.query(query);
       return res.json({
         message: "Succesfully retrieved all users",
         data: result.rows
