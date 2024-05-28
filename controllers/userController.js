@@ -5,7 +5,7 @@ const bcrypt = require('bcrypt');
 
 exports.get = async function (req, res) {
     try {
-      const result = await db.query('SELECT * FROM users');
+      const result = await db.query();
       return res.json({
         message: "Succesfully retrieved all users",
         data: result.rows
@@ -14,6 +14,24 @@ exports.get = async function (req, res) {
       console.error(err);
       res.status(500).send('Internal Server Error');
     }
+}
+
+exports.getOne = async function (req, res) {
+  try {
+    const user_id = req.params.user_id;
+    const query = 'SELECT * FROM users WHERE user_id = $1 LIMIT 1;'
+    const values = [user_id];
+
+    const result = await db.query(query, values);
+
+    return res.json({
+      message: "Succesfully retrieved all users",
+      data: result.rows
+    });
+  } catch (err) {
+    console.error(err);
+    res.status(500).send('Internal Server Error');
+  }
 }
 
 exports.post = async function (req, res) {

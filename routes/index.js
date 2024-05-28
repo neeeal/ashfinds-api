@@ -3,7 +3,7 @@ const router = express.Router();
 
 const initRoutes = (app) => {
   router.use('/user', require('./user'));
-  router.use('/blacklist', require('./blacklist'));
+  router.use('/auth', require('./auth'));
 
   router.get("/", (req,res) => {
     return res.status(200).json({
